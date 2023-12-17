@@ -3,6 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders.blob_loaders.youtube_audio import YoutubeAudioLoader
 from langchain.document_loaders.parsers import OpenAIWhisperParser
 from langchain.document_loaders.generic import GenericLoader
+from langchain.document_loaders import WebBaseLoader
 
 class DocumentProcessor:
     def __init__(self, chunk_size=100, chunk_overlap=20):
@@ -48,3 +49,17 @@ class DocumentProcessor:
         loader = GenericLoader(youtube_loader, parser)
         docs = loader.load()
         return ' '.join([doc.page_content for doc in docs])
+    
+    def load_from_web(self, url):
+        """
+        Loads and extracts text from a web page.
+
+        Args:
+        url (str): URL of the web page.
+
+        Returns:
+        str: Extracted text content from the web page.
+        """
+        web_loader = WebBaseLoader(web_path=url)
+        text = web_loader.load()
+        return text
