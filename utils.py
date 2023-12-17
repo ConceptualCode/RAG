@@ -1,5 +1,8 @@
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders.blob_loaders.youtube_audio import YoutubeAudioLoader
+from langchain.document_loaders.parsers import OpenAIWhisperParser
+from langchain.document_loaders.generic import GenericLoader
 
 class DocumentProcessor:
     def __init__(self, chunk_size=100, chunk_overlap=20):
@@ -28,3 +31,20 @@ class DocumentProcessor:
         # Split the document into chunks
         chunks = self.text_splitter.split_documents(documents)
         return chunks
+    
+    def load_from_youtube(self, video_url, save_dir='youtube'):
+        """
+        Loads and processes audio from a YouTube video.
+
+        Args:
+        video_url (str): URL of the YouTube video.
+        save_dir (str): Directory to save audio files.
+
+        Returns:
+        str: Transcribed text content from the YouTube video.
+        """
+        youtube_loader = YoutubeAudioLoader([video_url], save_dir)
+        parser = OpenAIWhisperParser()  # Utilizes OpenAI's Whisper API for transcription
+        loader = GenericLoader(youtube_loader, parser)
+        docs = loader.load()  # Returns a list of Documents with transcribed text
+        return ' '.join([doc.page_content for doc in docs])
