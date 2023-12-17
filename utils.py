@@ -9,7 +9,7 @@ class DocumentLoader:
         """
         Initializes the DocumentLoader.
         """
-        pass  # No initialization needed for simple loading
+        pass
 
     def load_pdf(self, file_path):
         """
