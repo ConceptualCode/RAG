@@ -44,7 +44,7 @@ class DocumentProcessor:
         str: Transcribed text content from the YouTube video.
         """
         youtube_loader = YoutubeAudioLoader([video_url], save_dir)
-        parser = OpenAIWhisperParser()  # Utilizes OpenAI's Whisper API for transcription
+        parser = OpenAIWhisperParser() 
         loader = GenericLoader(youtube_loader, parser)
-        docs = loader.load()  # Returns a list of Documents with transcribed text
+        docs = loader.load()
         return ' '.join([doc.page_content for doc in docs])
