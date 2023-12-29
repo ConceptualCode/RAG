@@ -2,6 +2,10 @@ from langchain.document_loaders import PyPDFLoader, YoutubeAudioLoader, WebBaseL
 from langchain.document_loaders.parsers import OpenAIWhisperParser
 from langchain.document_loaders.generic import GenericLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import Chroma
+from langchain.embeddings.openai import OpenAIEmbeddings
+import os
+import tempfile
 
 
 class DocumentLoader:
@@ -11,7 +15,7 @@ class DocumentLoader:
         """
         pass
 
-    def load_pdf(self, file_path):
+    def load_pdf(self, uploaded_file):
         """
         Loads a PDF file using langchain's PyPDFLoader.
 
@@ -21,9 +25,23 @@ class DocumentLoader:
         Returns:
         list: A list of Documents from the PDF file.
         """
-        loader = PyPDFLoader(file_path)
-        documents = loader.load()
-        return documents
+        # Save the uploaded file temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+            tmp_file.write(uploaded_file.getvalue())
+            temp_file_path = tmp_file.name
+
+        # Load the PDF using PyPDFLoader
+        loaders = [PyPDFLoader(temp_file_path)]
+        docs = []
+        for loader in loaders:
+            docs.extend(loader.load())
+
+        os.remove(temp_file_path)
+
+        return docs
+
+
+
     
     def load_from_youtube(self, video_url, save_dir='youtube'):
         """
@@ -34,13 +52,13 @@ class DocumentLoader:
         save_dir (str): Directory to save audio files.
 
         Returns:
-        str: Transcribed text content from the YouTube video.
+        list: Transcribed text content from the YouTube video.
         """
         youtube_loader = YoutubeAudioLoader([video_url], save_dir)
         parser = OpenAIWhisperParser()
         loader = GenericLoader(youtube_loader, parser)
         docs = loader.load()
-        return ' '.join([doc.page_content for doc in docs])
+        return docs
     
     def load_from_web(self, url):
         """
@@ -55,6 +73,23 @@ class DocumentLoader:
         web_loader = WebBaseLoader(web_path=url)
         text = web_loader.load()
         return text
+    
+
+    def index_documents(self, documents, persist_directory):
+        """
+        Indexes a list of documents into the Chroma vector store.
+
+        Args:
+        vectordb (Chroma): The Chroma vector store instance.
+        documents (list): List of document texts to index.
+
+        Returns:
+        db
+        """
+        embeddings = OpenAIEmbeddings()
+        db = Chroma.from_documents(documents=documents, embedding=embeddings, persist_directory=persist_directory)
+        return db
+
 
 class DocumentSplitter:
     def __init__(self, chunk_size=500, chunk_overlap=50, separators=["\n\n", "\n", ". ", " ", ""]):
@@ -79,4 +114,4 @@ class DocumentSplitter:
         Returns:
         list: A list of text chunks.
         """
-        return self.text_splitter.split_text(document)
+        return self.text_splitter.split_documents(document)
