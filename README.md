@@ -41,11 +41,13 @@ RAG AI is a robust application combining a Flask backend with a Streamlit fronte
 
    Make a dir docs/chroma in the root directory
 
-4. Run the Flask Backend:
+4. Make sure you have FFmpeg
+
+5. Run the Flask Backend:
    ```bash
    python app.py
 
-5. Run the Streamlit Frontend:
+6. Run the Streamlit Frontend:
    ```bash
    streamlit run streamlit_app.py
 
