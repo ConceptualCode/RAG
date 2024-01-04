@@ -38,7 +38,7 @@ RAG AI is a robust application combining a Flask backend with a Streamlit fronte
    Create a .env file in the root directory and add your OpenAI API key:
 
    OPENAI_API_KEY=YourOpenAIKeyHere
-   
+
    Make a dir docs/chroma in the root directory
 
 4. Run the Flask Backend:
@@ -61,7 +61,7 @@ RAG AI is a robust application combining a Flask backend with a Streamlit fronte
 #### For the Streamlit frontend:
 
 
-docker pull yourusername/rag-frontend
+docker pull tonysoro/rag-frontend
 
 ### 2. Run containers
 
