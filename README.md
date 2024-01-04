@@ -11,7 +11,7 @@ RAG AI is a robust application combining a Flask backend with a Streamlit fronte
 
 ## Getting Started
 
-![Chat Interface](images/Method.png)
+![Chat Interface](images/Framework.png)
 
 ### Prerequisites
 
