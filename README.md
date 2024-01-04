@@ -78,7 +78,7 @@ Ensure you have an .env file with your OpenAI API key:
 Access the Streamlit interface at http://localhost:8501 to interact with the chatbot, upload PDFs, index YouTube audio, or extract web content. The Flask backend will process and respond to your requests.
 
 
-### References and Acknowledgments
+#### References and Acknowledgments
 
 This project leverages several exceptional open-source tools and resources. Special thanks to the following for their significant contributions to the development of RAG AI:
 
@@ -89,9 +89,6 @@ This project leverages several exceptional open-source tools and resources. Spec
 - **Streamlit Documentation**: Streamlit's user-friendly approach to building data applications was key in developing RAG AI's frontend. The Streamlit documentation was an invaluable resource for UI development. [Streamlit Documentation](https://docs.streamlit.io/)
 
 - **Docker Documentation**: Docker played a crucial role in containerizing the application, ensuring its portability and ease of deployment. The Docker documentation provided essential guidance on containerization and orchestration. [Docker Documentation](https://docs.docker.com/)
-
-We are deeply grateful for the contribution of these resources to the open-source community and for their role in the successful development of RAG AI.
-
 
 
 
