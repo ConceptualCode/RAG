@@ -55,24 +55,22 @@ RAG AI is a robust application combining a Flask backend with a Streamlit fronte
 ### 1. Pull the Docker Images
 #### For the Flask backend:
 
-
-   docker pull tonysoro/rag-backend
+    ```bash
+    docker pull tonysoro/rag-backend
 
 #### For the Streamlit frontend:
 
-
-docker pull tonysoro/rag-frontend
+    ```bash
+    docker pull tonysoro/rag-frontend
 
 ### 2. Run containers
-
-docker run --env-file .env -p 5000:5000 tonysoro/rag-backend
-docker run --env-file .env -p 8501:8501 tonysoro/rag-frontend
+    ```bash
+    docker run --env-file .env -p 5000:5000 tonysoro/rag-backend
+    docker run --env-file .env -p 8501:8501 tonysoro/rag-frontend
 
 Ensure you have an .env file with your OpenAI API key:
-
-OPENAI_API_KEY=your_openai_api_key_here
-
-
+    ```bash
+    OPENAI_API_KEY=your_openai_api_key_here
 
 ### Usage
 Access the Streamlit interface at http://localhost:8501 to interact with the chatbot, upload PDFs, index YouTube audio, or extract web content. The Flask backend will process and respond to your requests.
