@@ -1,6 +1,12 @@
 # RAG AI (Retrieval Augmented Generative AI)
 
-RAG AI is a robust application combining a Flask backend with a Streamlit frontend. It's designed to interactively chat with users, process and index documents, and handle multimedia content such as PDFs, YouTube videos and Web contents.
+RAG AI is a cutting-edge application that marries a Flask backend with a Streamlit frontend, creating a dynamic and interactive user experience. At its core, RAG AI is built upon the principles of Retrieval Augmented Generative AI, a powerful approach that combines the capabilities of generative AI models with information retrieval techniques. This method enhances the AI's responses by grounding them in a set of dynamically retrieved documents, leading to more accurate and informed answers.
+
+In RAG AI, we have integrated OpenAI's advanced embedding and chat models to facilitate meaningful interactions and responses. The application leverages OpenAI's embeddings to transform documents into rich, machine-understandable representations, enabling efficient similarity searches and information retrieval. Coupled with OpenAI's conversational models, RAG AI provides a seamless chat experience that can handle complex queries and engage users in meaningful dialogues.
+
+We have utilized the LangChain framework extensively to build and optimize the retrieval mechanisms, prompts, and conversational chains. LangChain provides a flexible and powerful toolkit for crafting conversational AI experiences, allowing RAG AI to harness the best of language models and document retrieval strategies.
+
+RAG AI is adept at processing and indexing various types of multimedia content, including PDF documents, YouTube videos, and web content.
 
 ## Main Features
 
